@@ -1,4 +1,6 @@
 # EFO
 EFO - Emotion Frame Ontology
 
-The Emotion Frame Ontology is aligned to DOLCE and it reuses D&S ontology design pattern.
+
+Emotions are a subject of intense debate in various disciplines. Despite the proliferation of theories and definitions, there is still no consensus on what emotions are, and how to model the different concepts involved when we talk about –– or categorize –– them. We present here an OWL frame-based ontology of emotions: the Emotion Frames Ontology (EFO). </br>
+EFO treats emotions as semantic frames, with a set of semantic roles that capture the different aspects of emotional experience. EFO follows pattern-based ontology design, and is aligned to the DOLCE foundational ontology. EFO is used to model multiple emotion theories, which can be cross-linked as modules in an Emotion Ontology Network. In this paper, we exemplify it by modeling Ekman’s Basic Emotions (BE) Theory as an EFO-BE module, and demonstrate how to perform automated inferences on the representation of emotion situations. EFO-BE has been evaluated by lexicalizing the BE emotion frames from within the Framester knowledge graph, and implementing a graph-based emotion detector from text. In addition, an EFO integration of multimodal datasets, including emotional speech and emotional face expressions, has been performed to enable further inquiry into cross-modal emotion semantics.
