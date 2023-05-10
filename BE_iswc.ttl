@@ -1,0 +1,1665 @@
+@prefix : <http://www.semanticweb.org/sdg/ontologies/2022/11/untitled-ontology-144#> .
+@prefix be: <http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#> .
+@prefix dul: <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix exuviae: <http://www.ontologydesignpatterns.org/ont/is/exuviae.owl#> .
+@prefix basicemotions: <http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#> .
+@base <http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl> .
+
+<http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl> rdf:type owl:Ontology ;
+                                                                        owl:imports <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl> ;
+                                                                        rdfs:comment "This module is dedicated to the Basic Emotion Theory as described by Paul Ekman, in particular this ontological module is realized following the structure proposed here: http://atlasofemotions.org , and representing it as ontological module following a Frame Semantics approach." .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://www.ontologydesignpatterns.org/ont/is/exuviae.owl#bibRef
+exuviae:bibRef rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#associatedWith
+dul:associatedWith rdf:type owl:ObjectProperty .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#emotionalTendencyTowards
+basicemotions:emotionalTendencyTowards rdf:type owl:ObjectProperty ;
+                                       rdfs:domain basicemotions:Psychopathology ;
+                                       rdfs:range basicemotions:BE_Emotion .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#hasAntidote
+basicemotions:hasAntidote rdf:type owl:ObjectProperty ;
+                          rdfs:range basicemotions:EmotionAntidote .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#hasConsequence
+basicemotions:hasConsequence rdf:type owl:ObjectProperty ;
+                             owl:inverseOf basicemotions:isConsequenceOf .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#hasImpediment
+basicemotions:hasImpediment rdf:type owl:ObjectProperty ;
+                            rdfs:range basicemotions:EmotionImpediment .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#hasMessage
+basicemotions:hasMessage rdf:type owl:ObjectProperty .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#hasPersonalityTrait
+basicemotions:hasPersonalityTrait rdf:type owl:ObjectProperty ;
+                                  rdfs:subPropertyOf basicemotions:hasSignal .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#hasPreCondition
+basicemotions:hasPreCondition rdf:type owl:ObjectProperty ;
+                              owl:inverseOf basicemotions:isPreconditionOf ;
+                              rdfs:range basicemotions:PreCondition .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#hasSignal
+basicemotions:hasSignal rdf:type owl:ObjectProperty .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#isConsequenceOf
+basicemotions:isConsequenceOf rdf:type owl:ObjectProperty ;
+                              rdfs:subPropertyOf owl:topObjectProperty .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#isPreconditionOf
+basicemotions:isPreconditionOf rdf:type owl:ObjectProperty ;
+                               rdfs:subPropertyOf dul:isPreconditionOf .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#lessIntenseThan
+basicemotions:lessIntenseThan rdf:type owl:ObjectProperty ;
+                              owl:inverseOf basicemotions:moreIntenseThan .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#moreIntenseThan
+basicemotions:moreIntenseThan rdf:type owl:ObjectProperty ,
+                                       owl:TransitiveProperty .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event
+dul:Event rdf:type owl:Class .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Abhorrence
+basicemotions:Abhorrence rdf:type owl:Class ;
+                         rdfs:subClassOf basicemotions:Disgust ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty basicemotions:hasAntidote ;
+                                           owl:someValuesFrom basicemotions:AbhorrenceAntidote
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty basicemotions:moreIntenseThan ;
+                                           owl:someValuesFrom basicemotions:Revulsion
+                                         ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#AbhorrenceAntidote
+basicemotions:AbhorrenceAntidote rdf:type owl:Class ;
+                                 rdfs:subClassOf basicemotions:EmotionAntidote ;
+                                 exuviae:bibRef "In the case of toxic substances or situations, doing the best one can to calmly avoid them. In the case of actions, adopting the outlook of a caring physician, who might deeply disapprove certain behaviors but will focus on doing all that is possible to cure a person of their afflictions." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Action
+basicemotions:Action rdf:type owl:Class ;
+                     rdfs:subClassOf dul:Action ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty basicemotions:hasConsequence ;
+                                       owl:someValuesFrom basicemotions:PostCondition
+                                     ] ;
+                     exuviae:bibRef """This describes our emotional responses. This could be an external behavior such as yelling in anger, or could be internal, such as suppressing anger. Each emotion in the atlas shows a range of immediate actions, as well as intrinsic or intention actions. The action can be either constructive or destructive. Leading to further collaboration with others or to difficulty in collaborating.
+
+Source: atlasofemotions.org/#triggers/""" .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Amusement
+basicemotions:Amusement rdf:type owl:Class ;
+                        rdfs:subClassOf basicemotions:Enjoyment ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty basicemotions:hasImpediment ;
+                                          owl:someValuesFrom basicemotions:AmusementImpediment
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty basicemotions:moreIntenseThan ;
+                                          owl:someValuesFrom basicemotions:Compassion
+                                        ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#AmusementImpediment
+basicemotions:AmusementImpediment rdf:type owl:Class ;
+                                  rdfs:subClassOf basicemotions:EmotionImpediment ;
+                                  exuviae:bibRef "Tending to see things in negative ways." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Anger
+basicemotions:Anger rdf:type owl:Class ;
+                    rdfs:subClassOf basicemotions:BE_Emotion ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty basicemotions:hasPersonalityTrait ;
+                                      owl:someValuesFrom basicemotions:AngerPersonality
+                                    ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#AngerAction
+basicemotions:AngerAction rdf:type owl:Class ;
+                          rdfs:subClassOf basicemotions:Action .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#AngerPersonality
+basicemotions:AngerPersonality rdf:type owl:Class ;
+                               rdfs:subClassOf basicemotions:PersonalityTrait ;
+                               exuviae:bibRef "A hostile person is often angry and is known to others for the frequency of anger responses to the world. Often anger occurs with any frustration; the threshold for frustration is low. Hostile people may experience regret afterward and apologize for their anger, but nevertheless continue to respond angrily. Sometimes hostile people express their anger in a nasty way, using words to demean and cause psychological pain to others." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Anguish
+basicemotions:Anguish rdf:type owl:Class ;
+                      rdfs:subClassOf basicemotions:Sadness ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty basicemotions:hasAntidote ;
+                                        owl:someValuesFrom basicemotions:AnguishAntidote
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty basicemotions:moreIntenseThan ;
+                                        owl:someValuesFrom basicemotions:Sorrow
+                                      ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#AnguishAntidote
+basicemotions:AnguishAntidote rdf:type owl:Class ;
+                              rdfs:subClassOf basicemotions:EmotionAntidote ;
+                              exuviae:bibRef "Realizing that things and people are impermanent by nature. Revolting against this cannot lead to a fulfilled life." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Annoyance
+basicemotions:Annoyance rdf:type owl:Class ;
+                        rdfs:subClassOf basicemotions:Anger ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty basicemotions:hasAntidote ;
+                                          owl:someValuesFrom basicemotions:AnnoyanceAntidote
+                                        ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#AnnoyanceAntidote
+basicemotions:AnnoyanceAntidote rdf:type owl:Class ;
+                                rdfs:subClassOf basicemotions:EmotionAntidote ;
+                                exuviae:bibRef "Patience, open-mindedness, concern for others." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#AnorexiaNervosa
+basicemotions:AnorexiaNervosa rdf:type owl:Class ;
+                              rdfs:subClassOf basicemotions:Psychopathology ,
+                                              [ rdf:type owl:Restriction ;
+                                                owl:onProperty basicemotions:emotionalTendencyTowards ;
+                                                owl:someValuesFrom basicemotions:Disgust
+                                              ] ;
+                              exuviae:bibRef "A distorted self-image that may be maintained by various cognitive biases that alter how the affected individual evaluates and thinks about their body, food and eating. People with anorexia nervosa often view themselves as disgusting, overweight or “big” even when they are underweight." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#AntisocialPersonalityDisorder
+basicemotions:AntisocialPersonalityDisorder rdf:type owl:Class ;
+                                            rdfs:subClassOf basicemotions:Psychopathology ,
+                                                            [ rdf:type owl:Restriction ;
+                                                              owl:onProperty basicemotions:emotionalTendencyTowards ;
+                                                              owl:someValuesFrom basicemotions:Anger
+                                                            ] ;
+                                            exuviae:bibRef "Characterized by a pervasive pattern of disregard for the rights of other people that often manifests as hostility and/or aggression. Deceit and manipulation are also central features." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Anxiety
+basicemotions:Anxiety rdf:type owl:Class ;
+                      rdfs:subClassOf basicemotions:Fear ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty basicemotions:hasAntidote ;
+                                        owl:someValuesFrom basicemotions:AnxietyAntidote
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty basicemotions:moreIntenseThan ;
+                                        owl:someValuesFrom basicemotions:Nervousness
+                                      ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#AnxietyAntidote
+basicemotions:AnxietyAntidote rdf:type owl:Class ;
+                              rdfs:subClassOf basicemotions:EmotionAntidote ;
+                              exuviae:bibRef "Making a special effort of letting go of ruminations about the past and anticipations of the future." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Apprehensive
+basicemotions:Apprehensive rdf:type owl:Class ;
+                           rdfs:subClassOf basicemotions:Mood ;
+                           exuviae:bibRef """Anxious that something bad will happen, on edge.
+
+
+Source: atlasofemotions.org/#triggers/""" .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Argumentativeness
+basicemotions:Argumentativeness rdf:type owl:Class ;
+                                rdfs:subClassOf basicemotions:Anger ,
+                                                [ rdf:type owl:Restriction ;
+                                                  owl:onProperty basicemotions:hasAntidote ;
+                                                  owl:someValuesFrom basicemotions:ArgumentativenessAntidote
+                                                ] ,
+                                                [ rdf:type owl:Restriction ;
+                                                  owl:onProperty basicemotions:moreIntenseThan ;
+                                                  owl:someValuesFrom basicemotions:Exasperation
+                                                ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#ArgumentativenessAntidote
+basicemotions:ArgumentativenessAntidote rdf:type owl:Class ;
+                                        rdfs:subClassOf basicemotions:EmotionAntidote ;
+                                        exuviae:bibRef "Making effort to understand the other’s perspective, cognitive empathy, benevolence, wishing to solve the problem through a mutually agreeable solution." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Aversion
+basicemotions:Aversion rdf:type owl:Class ;
+                       rdfs:subClassOf basicemotions:Disgust ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty basicemotions:hasAntidote ;
+                                         owl:someValuesFrom basicemotions:AversionAntidote
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty basicemotions:moreIntenseThan ;
+                                         owl:someValuesFrom basicemotions:Dislike
+                                       ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#AversionAntidote
+basicemotions:AversionAntidote rdf:type owl:Class ;
+                               rdfs:subClassOf basicemotions:EmotionAntidote ;
+                               exuviae:bibRef "Evaluating impartially the degree of harmfulness, taking appropriate measures, and then letting aversion dissolve in a space of mindful awareness." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Avoid
+basicemotions:Avoid rdf:type owl:Class ;
+                    rdfs:subClassOf basicemotions:IntentionalDisgustAction ,
+                                    basicemotions:IntrinsicDisgustAction ,
+                                    basicemotions:IntrinsicFearAction ;
+                    exuviae:bibRef "Either physically stay away from the threat or keep oneself from thinking about it." ,
+                                   "Either physically stay away from whatever is triggering the disgust or keep oneself from thinking about it." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#AvoidantPersonalityDisorder
+basicemotions:AvoidantPersonalityDisorder rdf:type owl:Class ;
+                                          rdfs:subClassOf basicemotions:Psychopathology ,
+                                                          [ rdf:type owl:Restriction ;
+                                                            owl:onProperty basicemotions:emotionalTendencyTowards ;
+                                                            owl:someValuesFrom basicemotions:Fear
+                                                          ] ;
+                                          exuviae:bibRef "Characterized by a pervasive pattern of social inhibition, feelings of inadequacy and a hypersensitivity to negative evaluation. People with this disorder are intensely afraid that others will ridicule them, reject them or criticize them." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#BE_Emotion
+basicemotions:BE_Emotion rdf:type owl:Class ;
+                         owl:equivalentClass [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                      owl:onProperty basicemotions:hasMessage ;
+                                                                      owl:someValuesFrom basicemotions:Message
+                                                                    ]
+                                                                    [ rdf:type owl:Restriction ;
+                                                                      owl:onProperty basicemotions:hasPersonalityTrait ;
+                                                                      owl:someValuesFrom basicemotions:PersonalityTrait
+                                                                    ]
+                                                                    [ rdf:type owl:Restriction ;
+                                                                      owl:onProperty basicemotions:hasSignal ;
+                                                                      owl:someValuesFrom basicemotions:Signal
+                                                                    ]
+                                                                  ) ;
+                                               rdf:type owl:Class
+                                             ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#BePassiveAggressive
+basicemotions:BePassiveAggressive rdf:type owl:Class ;
+                                  rdfs:subClassOf basicemotions:IntrinsicAngerAction ;
+                                  exuviae:bibRef "Take indirect actions that have an angry undercurrent." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#BipolarDisorder
+basicemotions:BipolarDisorder rdf:type owl:Class ;
+                              rdfs:subClassOf basicemotions:Psychopathology ,
+                                              [ rdf:type owl:Restriction ;
+                                                owl:onProperty basicemotions:emotionalTendencyTowards ;
+                                                owl:someValuesFrom basicemotions:Sadness
+                                              ] ;
+                              exuviae:bibRef "Also known as bipolar affective disorder (and originally called manic-depressive illness), this is a mental disorder characterized by periods of elevated mood and periods of depression." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Bitterness
+basicemotions:Bitterness rdf:type owl:Class ;
+                         rdfs:subClassOf basicemotions:Anger ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty basicemotions:moreIntenseThan ;
+                                           owl:someValuesFrom basicemotions:Argumentativeness
+                                         ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#BodyDysmorphicDisorder
+basicemotions:BodyDysmorphicDisorder rdf:type owl:Class ;
+                                     rdfs:subClassOf basicemotions:Psychopathology ,
+                                                     [ rdf:type owl:Restriction ;
+                                                       owl:onProperty basicemotions:emotionalTendencyTowards ;
+                                                       owl:someValuesFrom basicemotions:Disgust
+                                                     ] ;
+                                     exuviae:bibRef "A body-image disorder characterized by persistent and intrusive preoccupations with an imagined or slight defect in one’s appearance or a feeling of disgust with one’s appearance." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Bulimia
+basicemotions:Bulimia rdf:type owl:Class ;
+                      rdfs:subClassOf basicemotions:Psychopathology ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty basicemotions:emotionalTendencyTowards ;
+                                        owl:someValuesFrom basicemotions:Disgust
+                                      ] ;
+                      exuviae:bibRef "A disorder characterized by repeated binging on large quantities of food followed by induced vomiting; both the binging and purging may be accompanied by feelings of self-disgust." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Compassion
+basicemotions:Compassion rdf:type owl:Class ;
+                         rdfs:subClassOf basicemotions:Enjoyment ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty basicemotions:hasImpediment ;
+                                           owl:someValuesFrom basicemotions:CompassionImpediment
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty basicemotions:moreIntenseThan ;
+                                           owl:someValuesFrom basicemotions:Rejoicing
+                                         ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#CompassionImpediment
+basicemotions:CompassionImpediment rdf:type owl:Class ;
+                                   rdfs:subClassOf basicemotions:EmotionImpediment ;
+                                   exuviae:bibRef "Regret at having done something good at the cost of some personal efforts. Narrow-mindedness when caring only for a limited number of people who are close." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#ConstructiveAction
+basicemotions:ConstructiveAction rdf:type owl:Class ;
+                                 rdfs:subClassOf basicemotions:Action .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Cyclothemia
+basicemotions:Cyclothemia rdf:type owl:Class ;
+                          rdfs:subClassOf basicemotions:Psychopathology ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty basicemotions:emotionalTendencyTowards ;
+                                            owl:someValuesFrom basicemotions:Enjoyment
+                                          ] ;
+                          exuviae:bibRef "This is characterized by moods that shift noticeably up and down from a person’s baseline. The person may feel on top of the world for a time, followed by a low period when their feeling is somewhat blue. Between these cyclothymic highs and lows, the person may feel stable and fine." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Dehumanize
+basicemotions:Dehumanize rdf:type owl:Class ;
+                         rdfs:subClassOf basicemotions:IntrinsicDisgustAction ;
+                         exuviae:bibRef "Treat someone as though he or she is not a human being; deprive someone of human qualities, personality or spirit." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#DesctructiveAction
+basicemotions:DesctructiveAction rdf:type owl:Class ;
+                                 rdfs:subClassOf basicemotions:Action .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Despair
+basicemotions:Despair rdf:type owl:Class ;
+                      rdfs:subClassOf basicemotions:Sadness ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty basicemotions:hasAntidote ;
+                                        owl:someValuesFrom basicemotions:DespairAntidote
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty basicemotions:moreIntenseThan ;
+                                        owl:someValuesFrom basicemotions:Misery
+                                      ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#DespairAntidote
+basicemotions:DespairAntidote rdf:type owl:Class ;
+                              rdfs:subClassOf basicemotions:EmotionAntidote ;
+                              exuviae:bibRef "Understanding that a permanent state of sadness will not bring any real benefit. In the case of mourning someone, falling into long-term sadness and despair should not be seen as an homage paid to that person. It is better to pay homage by doing meaningful and altruistic acts." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Desperation
+basicemotions:Desperation rdf:type owl:Class ;
+                          rdfs:subClassOf basicemotions:Fear ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty basicemotions:moreIntenseThan ;
+                                            owl:someValuesFrom basicemotions:Dread
+                                          ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Disappointment
+basicemotions:Disappointment rdf:type owl:Class ;
+                             rdfs:subClassOf basicemotions:Sadness ,
+                                             [ rdf:type owl:Restriction ;
+                                               owl:onProperty basicemotions:hasAntidote ;
+                                               owl:someValuesFrom basicemotions:DisappointmentAntidote
+                                             ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#DisappointmentAntidote
+basicemotions:DisappointmentAntidote rdf:type owl:Class ;
+                                     rdfs:subClassOf basicemotions:EmotionAntidote ;
+                                     exuviae:bibRef "Understanding that sadness is natural in appropriate circumstances, but also that experiencing loss is part of life and that one should not let oneself be overwhelmed. Trying to find a place of peace within oneself and thinking of constructive things that could be done instead." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Discouragement
+basicemotions:Discouragement rdf:type owl:Class ;
+                             rdfs:subClassOf basicemotions:Sadness ,
+                                             [ rdf:type owl:Restriction ;
+                                               owl:onProperty basicemotions:hasAntidote ;
+                                               owl:someValuesFrom basicemotions:DiscouragementAntidote
+                                             ] ,
+                                             [ rdf:type owl:Restriction ;
+                                               owl:onProperty basicemotions:moreIntenseThan ;
+                                               owl:someValuesFrom basicemotions:Disappointment
+                                             ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#DiscouragementAntidote
+basicemotions:DiscouragementAntidote rdf:type owl:Class ;
+                                     rdfs:subClassOf basicemotions:EmotionAntidote ;
+                                     exuviae:bibRef "Understanding that a permanent state of sadness will not bring any real benefit. In the case of mourning someone, falling into long-term sadness and despair should not be seen as an homage paid to that person. It is better to pay homage by doing meaningful and altruistic acts." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Disgust
+basicemotions:Disgust rdf:type owl:Class ;
+                      rdfs:subClassOf basicemotions:BE_Emotion ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty basicemotions:hasPersonalityTrait ;
+                                        owl:someValuesFrom basicemotions:DisgustPersonality
+                                      ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#DisgustAction
+basicemotions:DisgustAction rdf:type owl:Class ;
+                            rdfs:subClassOf basicemotions:Action .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#DisgustPersonality
+basicemotions:DisgustPersonality rdf:type owl:Class ;
+                                 rdfs:subClassOf basicemotions:PersonalityTrait ;
+                                 exuviae:bibRef "A person who often feels disgusted by others may have an inflated sense of self-worth and a hyper-aversion toward others. Someone who is disgusted or dissatisfied with everything can be unpleasant to be around." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Dislike
+basicemotions:Dislike rdf:type owl:Class ;
+                      rdfs:subClassOf basicemotions:Disgust ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty basicemotions:hasAntidote ;
+                                        owl:someValuesFrom basicemotions:DislikeAntidote
+                                      ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#DislikeAntidote
+basicemotions:DislikeAntidote rdf:type owl:Class ;
+                              rdfs:subClassOf basicemotions:EmotionAntidote ;
+                              exuviae:bibRef "While evaluating impartially the ethical issues, generating compassion so as to find the best way to remedy the causes and conditions that triggered dislike." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Dispute
+basicemotions:Dispute rdf:type owl:Class ;
+                      rdfs:subClassOf basicemotions:IntrinsicAngerAction ;
+                      exuviae:bibRef "Disagree in a manner that may escalate the conflict." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#DisruptiveMoodDysregulationDisorder
+basicemotions:DisruptiveMoodDysregulationDisorder rdf:type owl:Class ;
+                                                  rdfs:subClassOf basicemotions:Psychopathology ,
+                                                                  [ rdf:type owl:Restriction ;
+                                                                    owl:onProperty basicemotions:emotionalTendencyTowards ;
+                                                                    owl:someValuesFrom basicemotions:Anger
+                                                                  ] ;
+                                                  exuviae:bibRef "Severe recurrent temper outbursts manifested verbally (e.g., verbal rages) and/or behaviorally (e.g., physical aggression toward people or property) that are grossly out of proportion in intensity or duration to the situation or provocation." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Distaste
+basicemotions:Distaste rdf:type owl:Class ;
+                       rdfs:subClassOf basicemotions:Disgust ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty basicemotions:hasAntidote ;
+                                         owl:someValuesFrom basicemotions:DistasteAntidote
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty basicemotions:moreIntenseThan ;
+                                         owl:someValuesFrom basicemotions:Aversion
+                                       ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#DistasteAntidote
+basicemotions:DistasteAntidote rdf:type owl:Class ;
+                               rdfs:subClassOf basicemotions:EmotionAntidote ;
+                               exuviae:bibRef "Evaluating impartially the degree of harmfulness, taking appropriate measures, and then letting distaste dissolve in a space of mindful awareness." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Distraughtness
+basicemotions:Distraughtness rdf:type owl:Class ;
+                             rdfs:subClassOf basicemotions:Sadness ,
+                                             [ rdf:type owl:Restriction ;
+                                               owl:onProperty basicemotions:hasAntidote ;
+                                               owl:someValuesFrom basicemotions:DistraughtnessAntidote
+                                             ] ,
+                                             [ rdf:type owl:Restriction ;
+                                               owl:onProperty basicemotions:moreIntenseThan ;
+                                               owl:someValuesFrom basicemotions:Discouragement
+                                             ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#DistraughtnessAntidote
+basicemotions:DistraughtnessAntidote rdf:type owl:Class ;
+                                     rdfs:subClassOf basicemotions:EmotionAntidote ;
+                                     exuviae:bibRef "Understanding that a permanent state of sadness will not bring any real benefit. In the case of mourning someone, falling into long-term sadness and despair should not be seen as an homage paid to that person. It is better to pay homage by doing meaningful and altruistic acts." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Dread
+basicemotions:Dread rdf:type owl:Class ;
+                    rdfs:subClassOf basicemotions:Fear ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty basicemotions:hasAntidote ;
+                                      owl:someValuesFrom basicemotions:DreadAntidote
+                                    ] ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty basicemotions:moreIntenseThan ;
+                                      owl:someValuesFrom basicemotions:Anxiety
+                                    ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#DreadAntidote
+basicemotions:DreadAntidote rdf:type owl:Class ;
+                            rdfs:subClassOf basicemotions:EmotionAntidote ;
+                            exuviae:bibRef "Remaining as calm as as possible. Seeing what can be done for yourself and for others as well." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Dysphoric
+basicemotions:Dysphoric rdf:type owl:Class ;
+                        rdfs:subClassOf basicemotions:Mood ;
+                        exuviae:bibRef """An enduring feeling of discouragement or disappointment.
+
+
+Source: atlasofemotions.org/#triggers/""" .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Dysthymia
+basicemotions:Dysthymia rdf:type owl:Class ;
+                        rdfs:subClassOf basicemotions:Psychopathology ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty basicemotions:emotionalTendencyTowards ;
+                                          owl:someValuesFrom basicemotions:Sadness
+                                        ] ;
+                        exuviae:bibRef "Sometimes also called neurotic depression, dysthymic disorder or chronic depression, this is a mood disorder consisting of the same cognitive and physical problems as depression, with less severe but longer-lasting symptoms." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Ecstasy
+basicemotions:Ecstasy rdf:type owl:Class ;
+                      rdfs:subClassOf basicemotions:Enjoyment ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty basicemotions:hasImpediment ;
+                                        owl:someValuesFrom basicemotions:EcstasyImpediment
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty basicemotions:moreIntenseThan ;
+                                        owl:someValuesFrom basicemotions:Excitement
+                                      ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#EcstasyImpediment
+basicemotions:EcstasyImpediment rdf:type owl:Class ;
+                                rdfs:subClassOf basicemotions:EmotionImpediment ;
+                                exuviae:bibRef "Grasping, attachment and any other afflictive mental state (animosity, envy, arrogance, etc.)." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Elated
+basicemotions:Elated rdf:type owl:Class ;
+                     rdfs:subClassOf basicemotions:Mood ;
+                     exuviae:bibRef """A long-lasting, generalized good feeling. 
+
+Source: atlasofemotions.org/#triggers/""" .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#EmotionAntidote
+basicemotions:EmotionAntidote rdf:type owl:Class ;
+                              rdfs:subClassOf basicemotions:EmotionCounters .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#EmotionCounters
+basicemotions:EmotionCounters rdf:type owl:Class .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#EmotionImpediment
+basicemotions:EmotionImpediment rdf:type owl:Class ;
+                                rdfs:subClassOf basicemotions:EmotionCounters .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#EmotionalEpisode
+basicemotions:EmotionalEpisode rdf:type owl:Class ;
+                               rdfs:subClassOf dul:Event ;
+                               rdfs:seeAlso <https://github.com/StenDoipanni/EmoNet/blob/main/EkmanEmotions/EmotionEpisodeTimeline.png> .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#EmotionalState
+basicemotions:EmotionalState rdf:type owl:Class ;
+                             owl:equivalentClass [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty dul:isSettingFor ;
+                                                                          owl:someValuesFrom basicemotions:PhysicalChange
+                                                                        ]
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty dul:isSettingFor ;
+                                                                          owl:someValuesFrom basicemotions:PhysiologicalChange
+                                                                        ]
+                                                                      ) ;
+                                                   rdf:type owl:Class
+                                                 ] ;
+                             rdfs:subClassOf dul:Event ,
+                                             [ rdf:type owl:Restriction ;
+                                               owl:onProperty basicemotions:hasConsequence ;
+                                               owl:someValuesFrom basicemotions:Action
+                                             ] ,
+                                             [ rdf:type owl:Restriction ;
+                                               owl:onProperty basicemotions:isConsequenceOf ;
+                                               owl:someValuesFrom basicemotions:Trigger
+                                             ] ;
+                             exuviae:bibRef """This describes the emotion itself, inclusive of physical and psychological changes.
+
+Source: atlasofemotions.org/#triggers/""" .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Engage-Connect
+basicemotions:Engage-Connect rdf:type owl:Class ;
+                             rdfs:subClassOf basicemotions:IntrinsicEnjoymentAction ;
+                             exuviae:bibRef "Share one's feelings of enjoyment with others without a desire to cause jealousy." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Enjoyment
+basicemotions:Enjoyment rdf:type owl:Class ;
+                        rdfs:subClassOf basicemotions:BE_Emotion ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty basicemotions:hasPersonalityTrait ;
+                                          owl:someValuesFrom basicemotions:EnjoymentPersonality
+                                        ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#EnjoymentAction
+basicemotions:EnjoymentAction rdf:type owl:Class ;
+                              rdfs:subClassOf basicemotions:Action .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#EnjoymentPersonality
+basicemotions:EnjoymentPersonality rdf:type owl:Class ;
+                                   rdfs:subClassOf basicemotions:PersonalityTrait ;
+                                   exuviae:bibRef "A cheerful person may also be thought of as optimistic. This person sees the world in positive way and can easily be made to laugh and feel enjoyment." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Event
+basicemotions:Event rdf:type owl:Class ;
+                    rdfs:subClassOf dul:Event ;
+                    exuviae:bibRef """This describes a person, place, situation, image, thought, memory, smell, sound, taste or idea that we encounter from the outside world or from our own mind. We are constantly, automatically appraising, or assessing our inner and outer world. For example, when we hear a new song, we are instantly overlaying our knowledge of instruments and categories of music as we listen without even thinking, this is automatic appraisal.
+
+Source: http://atlasofemotions.org/#triggers/""" .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Exasperation
+basicemotions:Exasperation rdf:type owl:Class ;
+                           rdfs:subClassOf basicemotions:Anger ,
+                                           [ rdf:type owl:Restriction ;
+                                             owl:onProperty basicemotions:hasAntidote ;
+                                             owl:someValuesFrom basicemotions:ExasperationAntidote
+                                           ] ,
+                                           [ rdf:type owl:Restriction ;
+                                             owl:onProperty basicemotions:moreIntenseThan ;
+                                             owl:someValuesFrom basicemotions:Frustration
+                                           ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#ExasperationAntidote
+basicemotions:ExasperationAntidote rdf:type owl:Class ;
+                                   rdfs:subClassOf basicemotions:EmotionAntidote ;
+                                   exuviae:bibRef "Letting go of grasping. Patience, inner calm. Trying to understand the causes and conditions that brought about the undesirable situation." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Excitement
+basicemotions:Excitement rdf:type owl:Class ;
+                         rdfs:subClassOf basicemotions:Enjoyment ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty basicemotions:hasImpediment ;
+                                           owl:someValuesFrom basicemotions:ExcitementImpediment
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty basicemotions:moreIntenseThan ;
+                                           owl:someValuesFrom basicemotions:Wonder
+                                         ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#ExcitementImpediment
+basicemotions:ExcitementImpediment rdf:type owl:Class ;
+                                   rdfs:subClassOf basicemotions:EmotionImpediment ;
+                                   exuviae:bibRef "Feeling pessimism." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Exclaim
+basicemotions:Exclaim rdf:type owl:Class ;
+                      rdfs:subClassOf basicemotions:IntrinsicEnjoymentAction ;
+                      exuviae:bibRef "Vocally express enjoyment to others." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Fear
+basicemotions:Fear rdf:type owl:Class ;
+                   rdfs:subClassOf basicemotions:BE_Emotion ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty basicemotions:hasPersonalityTrait ;
+                                     owl:someValuesFrom basicemotions:FearPersonality
+                                   ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#FearAction
+basicemotions:FearAction rdf:type owl:Class ;
+                         rdfs:subClassOf basicemotions:Action .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#FearPersonality
+basicemotions:FearPersonality rdf:type owl:Class ;
+                              rdfs:subClassOf basicemotions:PersonalityTrait ;
+                              exuviae:bibRef "A shy or timid person. This personality type is likely to avoid risks and uncomfortable situations. Timid people may perceive the world as full of difficult situations." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#FeelAshamed
+basicemotions:FeelAshamed rdf:type owl:Class ;
+                          rdfs:subClassOf basicemotions:IntrinsicSadnessAction ;
+                          exuviae:bibRef "Feel embarrassed by one's feelings about the loss." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Fiero
+basicemotions:Fiero rdf:type owl:Class ;
+                    rdfs:subClassOf basicemotions:Enjoyment ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty basicemotions:hasImpediment ;
+                                      owl:someValuesFrom basicemotions:FieroImpediment
+                                    ] ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty basicemotions:moreIntenseThan ;
+                                      owl:someValuesFrom basicemotions:Peace
+                                    ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#FieroImpediment
+basicemotions:FieroImpediment rdf:type owl:Class ;
+                              rdfs:subClassOf basicemotions:EmotionImpediment ;
+                              exuviae:bibRef "Vanity, narcissism, failing to acknowledge with gratitude all those who contributed to make an achievement possible." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Freeze
+basicemotions:Freeze rdf:type owl:Class ;
+                     rdfs:subClassOf basicemotions:IntrinsicFearAction ;
+                     exuviae:bibRef "Become incapable of acting or speaking." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Frustration
+basicemotions:Frustration rdf:type owl:Class ;
+                          rdfs:subClassOf basicemotions:Anger ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty basicemotions:hasAntidote ;
+                                            owl:someValuesFrom basicemotions:FrustrationAntidote
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty basicemotions:moreIntenseThan ;
+                                            owl:someValuesFrom basicemotions:Annoyance
+                                          ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#FrustrationAntidote
+basicemotions:FrustrationAntidote rdf:type owl:Class ;
+                                  rdfs:subClassOf basicemotions:EmotionAntidote ;
+                                  exuviae:bibRef "Letting go, letting go of grasping, putting things in a larger perspective." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Fury
+basicemotions:Fury rdf:type owl:Class ;
+                   rdfs:subClassOf basicemotions:Anger ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty basicemotions:hasAntidote ;
+                                     owl:someValuesFrom basicemotions:FuryAntidote
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty basicemotions:moreIntenseThan ;
+                                     owl:someValuesFrom basicemotions:Vengefulness
+                                   ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#FuryAntidote
+basicemotions:FuryAntidote rdf:type owl:Class ;
+                           rdfs:subClassOf basicemotions:EmotionAntidote ;
+                           exuviae:bibRef "Taking a break, physically and mentally, from the circumstances that brought fury about. Looking at fury itself with the eye of awareness as if gazing at a raging fire and slowly letting it calm down." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#GeneralizedAnxietyDisorder
+basicemotions:GeneralizedAnxietyDisorder rdf:type owl:Class ;
+                                         rdfs:subClassOf basicemotions:Psychopathology ,
+                                                         [ rdf:type owl:Restriction ;
+                                                           owl:onProperty basicemotions:emotionalTendencyTowards ;
+                                                           owl:someValuesFrom basicemotions:Fear
+                                                         ] ;
+                                         exuviae:bibRef "An anxiety disorder that is characterized by excessive, uncontrollable and often irrational worry and apprehensive expectation about events or activities." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Gloat
+basicemotions:Gloat rdf:type owl:Class ;
+                    rdfs:subClassOf basicemotions:IntrinsicEnjoymentAction ;
+                    exuviae:bibRef "Enjoy others’ envy of your state of enjoyment." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Grief
+basicemotions:Grief rdf:type owl:Class ;
+                    rdfs:subClassOf basicemotions:Sadness ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty basicemotions:hasAntidote ;
+                                      owl:someValuesFrom basicemotions:GriefAntidote
+                                    ] ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty basicemotions:moreIntenseThan ;
+                                      owl:someValuesFrom basicemotions:Despair
+                                    ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#GriefAntidote
+basicemotions:GriefAntidote rdf:type owl:Class ;
+                            rdfs:subClassOf basicemotions:EmotionAntidote ;
+                            exuviae:bibRef "Understanding that a permanent state of sadness will not bring any real benefit. In the case of mourning someone, falling into long-term sadness and despair should not be seen as an homage paid to that person. It is better to pay homage by doing meaningful and altruistic acts." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Helplessness
+basicemotions:Helplessness rdf:type owl:Class ;
+                           rdfs:subClassOf basicemotions:Sadness ,
+                                           [ rdf:type owl:Restriction ;
+                                             owl:onProperty basicemotions:hasAntidote ;
+                                             owl:someValuesFrom basicemotions:HelplessnessAntidote
+                                           ] ,
+                                           [ rdf:type owl:Restriction ;
+                                             owl:onProperty basicemotions:moreIntenseThan ;
+                                             owl:someValuesFrom basicemotions:Resignation
+                                           ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#HelplessnessAntidote
+basicemotions:HelplessnessAntidote rdf:type owl:Class ;
+                                   rdfs:subClassOf basicemotions:EmotionAntidote ;
+                                   exuviae:bibRef "Understanding that a permanent state of sadness will not bring any real benefit. In the case of mourning someone, falling into long-term sadness and despair should not be seen as an homage paid to that person. It is better to pay homage by doing meaningful and altruistic acts." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Hesitate
+basicemotions:Hesitate rdf:type owl:Class ;
+                       rdfs:subClassOf basicemotions:IntrinsicFearAction ;
+                       exuviae:bibRef "Hold back in doubt or indecision, often momentarily." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Hopelessness
+basicemotions:Hopelessness rdf:type owl:Class ;
+                           rdfs:subClassOf basicemotions:Sadness ,
+                                           [ rdf:type owl:Restriction ;
+                                             owl:onProperty basicemotions:moreIntenseThan ;
+                                             owl:someValuesFrom basicemotions:Helplessness
+                                           ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Horror
+basicemotions:Horror rdf:type owl:Class ;
+                     rdfs:subClassOf basicemotions:Fear ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty basicemotions:hasAntidote ;
+                                       owl:someValuesFrom basicemotions:HorrorAntidote
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty basicemotions:moreIntenseThan ;
+                                       owl:someValuesFrom basicemotions:Panic
+                                     ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#HorrorAntidote
+basicemotions:HorrorAntidote rdf:type owl:Class ;
+                             rdfs:subClassOf basicemotions:EmotionAntidote ;
+                             exuviae:bibRef "Trying to see if anything can be done immediately. If that is not the case, creating distance to see if something can be done from afar. Responding with firmness and compassion, never with hatred." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Indulge
+basicemotions:Indulge rdf:type owl:Class ;
+                      rdfs:subClassOf basicemotions:IntrinsicEnjoymentAction ;
+                      exuviae:bibRef "Allow oneself to fully experience the pleasure of good feelings." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Insult
+basicemotions:Insult rdf:type owl:Class ;
+                     rdfs:subClassOf basicemotions:IntrinsicAngerAction ;
+                     exuviae:bibRef "Disparage the other person in an offensive or hurtful way that is likely to escalate the conflict rather than resolve it." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#IntentionalAngerAction
+basicemotions:IntentionalAngerAction rdf:type owl:Class ;
+                                     rdfs:subClassOf basicemotions:AngerAction ;
+                                     exuviae:bibRef "Set limits, Be firm, Withdraw, Take a time out, Breathe, Practice patience, Reframe, Distract, Avoid, Remove the interference" .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#IntentionalDisgustAction
+basicemotions:IntentionalDisgustAction rdf:type owl:Class ;
+                                       rdfs:subClassOf basicemotions:DisgustAction ;
+                                       exuviae:bibRef "Withdraw, Avoid" .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#IntentionalFearAction
+basicemotions:IntentionalFearAction rdf:type owl:Class ;
+                                    rdfs:subClassOf basicemotions:FearAction ;
+                                    exuviae:bibRef "Reframe, Be mindful, Breathe, Distract" .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#IntentionalSadnessAction
+basicemotions:IntentionalSadnessAction rdf:type owl:Class ;
+                                       rdfs:subClassOf basicemotions:SadnessAction ;
+                                       exuviae:bibRef "Withdraw, Distract" .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#IntermittentExplosiveDisorder
+basicemotions:IntermittentExplosiveDisorder rdf:type owl:Class ;
+                                            rdfs:subClassOf basicemotions:Psychopathology ,
+                                                            [ rdf:type owl:Restriction ;
+                                                              owl:onProperty basicemotions:emotionalTendencyTowards ;
+                                                              owl:someValuesFrom basicemotions:Anger
+                                                            ] ;
+                                            exuviae:bibRef "Impulsively aggressive and assaultive behaviors out of proportion to triggers." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#IntrinsicAngerAction
+basicemotions:IntrinsicAngerAction rdf:type owl:Class ;
+                                   rdfs:subClassOf basicemotions:AngerAction ;
+                                   exuviae:bibRef "Quarrel, Insult, Undermine, Dispute, Scream/yell, Use physical force, Simmer/brood, Be passive-aggressive" .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#IntrinsicDisgustAction
+basicemotions:IntrinsicDisgustAction rdf:type owl:Class ;
+                                     rdfs:subClassOf basicemotions:DisgustAction ;
+                                     exuviae:bibRef "Withdraw, Avoid, Vomit, Dehumanize" .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#IntrinsicEnjoymentAction
+basicemotions:IntrinsicEnjoymentAction rdf:type owl:Class ;
+                                       rdfs:subClassOf basicemotions:EnjoymentAction ;
+                                       exuviae:bibRef "Seek more, Maintain, Exclaim, Engage/connect, Savor, Indulge" .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#IntrinsicFearAction
+basicemotions:IntrinsicFearAction rdf:type owl:Class ;
+                                  rdfs:subClassOf basicemotions:FearAction ;
+                                  exuviae:bibRef "Withdraw, Avoid, Hesitate, Freeze, Scream/yell, Ruminate, Worry." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#IntrinsicSadnessAction
+basicemotions:IntrinsicSadnessAction rdf:type owl:Class ;
+                                     rdfs:subClassOf basicemotions:SadnessAction ;
+                                     exuviae:bibRef "Seek comfort, Withdraw, Mourn, Protest, Feel ashamed" .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Irritable
+basicemotions:Irritable rdf:type owl:Class ;
+                        rdfs:subClassOf basicemotions:Mood ;
+                        exuviae:bibRef """Predisposed to becoming angry, easily provoked. 
+
+
+Source: atlasofemotions.org/#triggers/""" .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Loathing
+basicemotions:Loathing rdf:type owl:Class ;
+                       rdfs:subClassOf basicemotions:Disgust ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty basicemotions:moreIntenseThan ;
+                                         owl:someValuesFrom basicemotions:Abhorrence
+                                       ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#LoathingOthers
+basicemotions:LoathingOthers rdf:type owl:Class ;
+                             rdfs:subClassOf basicemotions:Loathing ,
+                                             [ rdf:type owl:Restriction ;
+                                               owl:onProperty basicemotions:hasAntidote ;
+                                               owl:someValuesFrom basicemotions:LoathingOthersAntidote
+                                             ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#LoathingOthersAntidote
+basicemotions:LoathingOthersAntidote rdf:type owl:Class ;
+                                     rdfs:subClassOf basicemotions:EmotionAntidote ;
+                                     exuviae:bibRef "Adopting the outlook of a caring physician, who might deeply disapprove certain behaviors but will focus on doing all that is possible to cure a person of their afflictions." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#LoathingSelf
+basicemotions:LoathingSelf rdf:type owl:Class ;
+                           rdfs:subClassOf basicemotions:Loathing ,
+                                           [ rdf:type owl:Restriction ;
+                                             owl:onProperty basicemotions:hasAntidote ;
+                                             owl:someValuesFrom basicemotions:LoathingSelfAntidote
+                                           ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#LoathingSelfAntidote
+basicemotions:LoathingSelfAntidote rdf:type owl:Class ;
+                                   rdfs:subClassOf basicemotions:EmotionAntidote ;
+                                   exuviae:bibRef "Using healthy regret to generate the determination to improve oneself; whenever possible, repairing the harm caused to others. Not falling into pessimistic guilt, thinking that one is fundamentally bad and that that is the way one is bound to remain. Not underestimating the potential for change." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Maintain
+basicemotions:Maintain rdf:type owl:Class ;
+                       rdfs:subClassOf basicemotions:IntrinsicEnjoymentAction ;
+                       exuviae:bibRef "Continue to do what is necessary to continue the enjoyable feelings." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#MajorDepressiveDisorder
+basicemotions:MajorDepressiveDisorder rdf:type owl:Class ;
+                                      rdfs:subClassOf basicemotions:Psychopathology ,
+                                                      [ rdf:type owl:Restriction ;
+                                                        owl:onProperty basicemotions:emotionalTendencyTowards ;
+                                                        owl:someValuesFrom basicemotions:Sadness
+                                                      ] ;
+                                      exuviae:bibRef "Also known as clinical depression, major depression or unipolar depression, this is a mental disorder characterized by a pervasive and persistent low mood that is accompanied by low self-esteem and by a loss of interest or pleasure in normally enjoyable activities." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Mania-ManicEpisode
+basicemotions:Mania-ManicEpisode rdf:type owl:Class ;
+                                 rdfs:subClassOf basicemotions:Psychopathology ,
+                                                 [ rdf:type owl:Restriction ;
+                                                   owl:onProperty basicemotions:emotionalTendencyTowards ;
+                                                   owl:someValuesFrom basicemotions:Enjoyment
+                                                 ] ;
+                                 exuviae:bibRef "Mania at its extreme is commonly characterized by frenzied, ungovernable exuberance — essentially elation not grounded in reality. Frequently, confidence and self-esteem are excessively enlarged, and grand, extravagant ideas are expressed; this is called “grandiosity.” Mania is often part of bipolar disorder." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Message
+basicemotions:Message rdf:type owl:Class ;
+                      exuviae:bibRef """The message is what the emotion is telling us. All emotions have a message that is a response to the world around us.
+
+Source: atlasofemotions.org/#triggers/""" .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Misery
+basicemotions:Misery rdf:type owl:Class ;
+                     rdfs:subClassOf basicemotions:Sadness ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty basicemotions:hasAntidote ;
+                                       owl:someValuesFrom basicemotions:MiseryAntidote
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty basicemotions:moreIntenseThan ;
+                                       owl:someValuesFrom basicemotions:Hopelessness
+                                     ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#MiseryAntidote
+basicemotions:MiseryAntidote rdf:type owl:Class ;
+                             rdfs:subClassOf basicemotions:EmotionAntidote ;
+                             exuviae:bibRef "Understanding that a permanent state of sadness will not bring any real benefit. In the case of mourning someone, falling into long-term sadness and despair should not be seen as an homage paid to that person. It is better to pay homage by doing meaningful and altruistic acts." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Mood
+basicemotions:Mood rdf:type owl:Class ;
+                   exuviae:bibRef """Moods are longer-lasting cousins of an emotion that cause us to feel the related emotion repeatedly without any clear trigger.
+
+Source: atlasofemotions.org/#triggers/""" .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Mourn
+basicemotions:Mourn rdf:type owl:Class ;
+                    rdfs:subClassOf basicemotions:IntrinsicSadnessAction ;
+                    exuviae:bibRef "Express grief for one's loss through actions, dress and speech." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Naches
+basicemotions:Naches rdf:type owl:Class ;
+                     rdfs:subClassOf basicemotions:Enjoyment ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty basicemotions:hasImpediment ;
+                                       owl:someValuesFrom basicemotions:NachesImpediment
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty basicemotions:moreIntenseThan ;
+                                       owl:someValuesFrom basicemotions:Pride
+                                     ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#NachesImpediment
+basicemotions:NachesImpediment rdf:type owl:Class ;
+                               rdfs:subClassOf basicemotions:EmotionImpediment ;
+                               exuviae:bibRef "Pride mixed with arrogance and with partiality that makes one feel contemptuous about others’ achievements." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Nervousness
+basicemotions:Nervousness rdf:type owl:Class ;
+                          rdfs:subClassOf basicemotions:Fear ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty basicemotions:hasAntidote ;
+                                            owl:someValuesFrom basicemotions:NervousnessAntidote
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty basicemotions:moreIntenseThan ;
+                                            owl:someValuesFrom basicemotions:Trepidation
+                                          ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#NervousnessAntidote
+basicemotions:NervousnessAntidote rdf:type owl:Class ;
+                                  rdfs:subClassOf basicemotions:EmotionAntidote ;
+                                  exuviae:bibRef "Trying to ponder what can be done. Calming the mind gives the best chance to find the appropriate solution to what caused the nervousness in the first place." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#ObsessiveCompulsiveDisorder
+basicemotions:ObsessiveCompulsiveDisorder rdf:type owl:Class ;
+                                          rdfs:subClassOf basicemotions:Psychopathology ,
+                                                          [ rdf:type owl:Restriction ;
+                                                            owl:onProperty basicemotions:emotionalTendencyTowards ;
+                                                            owl:someValuesFrom basicemotions:Fear
+                                                          ] ;
+                                          exuviae:bibRef """OCD
+An anxiety disorder characterized by intrusive thoughts that produce uneasiness, apprehension, fear or worry (obsessions); repetitive behaviors aimed at reducing the associated anxiety (compulsions); or a combination of both obsessions and compulsions.""" .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#OppositionalDefianceDisorder
+basicemotions:OppositionalDefianceDisorder rdf:type owl:Class ;
+                                           rdfs:subClassOf basicemotions:Psychopathology ,
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty basicemotions:emotionalTendencyTowards ;
+                                                             owl:someValuesFrom basicemotions:Anger
+                                                           ] ;
+                                           exuviae:bibRef "A pattern of defiant, disobedient and hostile behavior in children or teens toward parents and people in authority, beyond normal age-appropriate misbehavior." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Panic
+basicemotions:Panic rdf:type owl:Class ;
+                    rdfs:subClassOf basicemotions:Fear ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty basicemotions:hasAntidote ;
+                                      owl:someValuesFrom basicemotions:PanicAntidote
+                                    ] ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty basicemotions:moreIntenseThan ;
+                                      owl:someValuesFrom basicemotions:Desperation
+                                    ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#PanicAntidote
+basicemotions:PanicAntidote rdf:type owl:Class ;
+                            rdfs:subClassOf basicemotions:EmotionAntidote ;
+                            exuviae:bibRef "Making an effort to see if anything can act as a mitigating factor (depending on the causes involved)." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Peace
+basicemotions:Peace rdf:type owl:Class ;
+                    rdfs:subClassOf basicemotions:Enjoyment ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty basicemotions:moreIntenseThan ;
+                                      owl:someValuesFrom basicemotions:Relief
+                                    ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#PerceptionDatabase
+basicemotions:PerceptionDatabase rdf:type owl:Class ;
+                                 exuviae:bibRef """This describes our universal/hardwired responses and our individually acquired emotional memories. For example, if the event is a smell and in the database is the stored memory of the shampoo our mother used in our childhood, and we are triggered to experience an emotion of warm nostalgia of a happy childhood. When the appraised event resembles something in our database, it may be a highly accurate or could create a distorted perception of the trigger. For example if we had an intimidating experience with a police officer when we were young and we are pulled over as an adult we could misperceive the situation with a distorted sense of fear.
+
+Source: http://atlasofemotions.org/#triggers/""" .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#PersonalityTrait
+basicemotions:PersonalityTrait rdf:type owl:Class .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#PhysicalChange
+basicemotions:PhysicalChange rdf:type owl:Class ;
+                             exuviae:bibRef """This describes the autonomic changes in our body which occur as our emotion arises. We can experience these changes as sensations in our body, feeling heat in our face, tightness in our jaw or shoulders, etc.
+
+Source: atlasofemotions.org/#triggers/""" .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#PhysiologicalChange
+basicemotions:PhysiologicalChange rdf:type owl:Class ;
+                                  exuviae:bibRef """This describes the qualitative experience of the emotion, how sadness feels sad, or anger feels angry.
+
+Source: atlasofemotions.org/#triggers/""" .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#PostCondition
+basicemotions:PostCondition rdf:type owl:Class ;
+                            rdfs:subClassOf dul:Event ;
+                            exuviae:bibRef """This describes the result or impact of our emotional actions. This could be external: if we have yelled at someone they may then yell back; or internal: if we have suppressed we could be feeling some ongoing irritation. The post condition could lead to our next episode of emotion, if someone is yelling back at us we are triggered once again to either anger, fear or sadness/ regret for our actions. Our post condition is an opportunity for us to build emotional awareness through reflection on our emotion, to understand the trigger, identify the felt experience and consider its impact it has had.
+
+Source: atlasofemotions.org/#triggers/""" .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#PostTraumaticStressDisorder
+basicemotions:PostTraumaticStressDisorder rdf:type owl:Class ;
+                                          rdfs:subClassOf basicemotions:Psychopathology ,
+                                                          [ rdf:type owl:Restriction ;
+                                                            owl:onProperty basicemotions:emotionalTendencyTowards ;
+                                                            owl:someValuesFrom basicemotions:Fear
+                                                          ] ;
+                                          exuviae:bibRef """PTSD
+A mental health condition that’s triggered by an often overwhelmingly terrifying event — either experiencing it or witnessing it. Symptoms may include flashbacks, nightmares and severe anxiety, as well as uncontrollable thoughts about the event.""" .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#PreCondition
+basicemotions:PreCondition rdf:type owl:Class ;
+                           rdfs:subClassOf dul:Event ;
+                           exuviae:bibRef """This describes the context or situations which may influence the way we enter the emotion. For example our pre-condition could be physiological: being hungry, tired or emotional: having had a very enjoyable or stressful day or coming out of a prior emotional episode.
+
+
+Source: http://atlasofemotions.org/#triggers/""" .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Pride
+basicemotions:Pride rdf:type owl:Class ;
+                    rdfs:subClassOf basicemotions:Enjoyment ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty basicemotions:hasAntidote ;
+                                      owl:someValuesFrom basicemotions:PrideAntidote
+                                    ] ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty basicemotions:moreIntenseThan ;
+                                      owl:someValuesFrom basicemotions:Fiero
+                                    ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#PrideAntidote
+basicemotions:PrideAntidote rdf:type owl:Class ;
+                            rdfs:subClassOf basicemotions:EmotionAntidote ;
+                            exuviae:bibRef "Humility. Putting things into perspective and realizing that there are many other people with similar or even better qualities than one’s own. Understanding that one could do something not just because one is so special, but because of many interdependent causes and conditions in which others have taken part." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Protest
+basicemotions:Protest rdf:type owl:Class ;
+                      rdfs:subClassOf basicemotions:IntrinsicSadnessAction ;
+                      exuviae:bibRef "Object to the loss." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Psychopathology
+basicemotions:Psychopathology rdf:type owl:Class .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Quarrel
+basicemotions:Quarrel rdf:type owl:Class ;
+                      rdfs:subClassOf basicemotions:IntrinsicAngerAction ;
+                      exuviae:bibRef "Verbally oppose in a manner intended to escalate the disagreement." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Rejoicing
+basicemotions:Rejoicing rdf:type owl:Class ;
+                        rdfs:subClassOf basicemotions:Enjoyment ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty basicemotions:hasImpediment ;
+                                          owl:someValuesFrom basicemotions:RejoicingImpediment
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty basicemotions:moreIntenseThan ;
+                                          owl:someValuesFrom basicemotions:SensoryPleasure
+                                        ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#RejoicingImpediment
+basicemotions:RejoicingImpediment rdf:type owl:Class ;
+                                  rdfs:subClassOf basicemotions:EmotionImpediment ;
+                                  exuviae:bibRef "Envy, jealousy, pride." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Relief
+basicemotions:Relief rdf:type owl:Class ;
+                     rdfs:subClassOf basicemotions:Enjoyment ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty basicemotions:hasImpediment ;
+                                       owl:someValuesFrom basicemotions:ReliefImpediment
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty basicemotions:moreIntenseThan ;
+                                       owl:someValuesFrom basicemotions:Schadenfreude
+                                     ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#ReliefImpediment
+basicemotions:ReliefImpediment rdf:type owl:Class ;
+                               rdfs:subClassOf basicemotions:EmotionImpediment ;
+                               exuviae:bibRef "Persisting in worrying unnecessarily." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Repugnance
+basicemotions:Repugnance rdf:type owl:Class ;
+                         rdfs:subClassOf basicemotions:Disgust ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty basicemotions:hasAntidote ;
+                                           owl:someValuesFrom basicemotions:RepugnanceAntidote
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty basicemotions:moreIntenseThan ;
+                                           owl:someValuesFrom basicemotions:Distaste
+                                         ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#RepugnanceAntidote
+basicemotions:RepugnanceAntidote rdf:type owl:Class ;
+                                 rdfs:subClassOf basicemotions:EmotionAntidote ;
+                                 exuviae:bibRef "Evaluating impartially the degree of harmfulness, taking appropriate measures, and then letting repugnance dissolve in a space of mindful awareness." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Resignation
+basicemotions:Resignation rdf:type owl:Class ;
+                          rdfs:subClassOf basicemotions:Sadness ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty basicemotions:moreIntenseThan ;
+                                            owl:someValuesFrom basicemotions:Distraughtness
+                                          ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Revulsion
+basicemotions:Revulsion rdf:type owl:Class ;
+                        rdfs:subClassOf basicemotions:Disgust ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty basicemotions:hasAntidote ;
+                                          owl:someValuesFrom basicemotions:RevulsionAntidote
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty basicemotions:moreIntenseThan ;
+                                          owl:someValuesFrom basicemotions:Repugnance
+                                        ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#RevulsionAntidote
+basicemotions:RevulsionAntidote rdf:type owl:Class ;
+                                rdfs:subClassOf basicemotions:EmotionAntidote ;
+                                exuviae:bibRef "Adopting the outlook of a caring physician, who might deeply disapprove certain behaviors but will focus on doing all that is possible to cure a person of their afflictions." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Ruminate
+basicemotions:Ruminate rdf:type owl:Class ;
+                       rdfs:subClassOf basicemotions:IntrinsicFearAction ,
+                                       basicemotions:IntrinsicSadnessAction ;
+                       exuviae:bibRef "Obsessively think about the emotional experience." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Sadness
+basicemotions:Sadness rdf:type owl:Class ;
+                      rdfs:subClassOf basicemotions:BE_Emotion ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty basicemotions:hasPersonalityTrait ;
+                                        owl:someValuesFrom basicemotions:SadnessPersonality
+                                      ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#SadnessAction
+basicemotions:SadnessAction rdf:type owl:Class ;
+                            rdfs:subClassOf basicemotions:Action .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#SadnessPersonality
+basicemotions:SadnessPersonality rdf:type owl:Class ;
+                                 rdfs:subClassOf basicemotions:PersonalityTrait ;
+                                 exuviae:bibRef "A somber person who is often feeling low may have clinical depression or may simply have more frequent feelings of sadness. This person may hold the perspective that life is hard and difficult." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Savor
+basicemotions:Savor rdf:type owl:Class ;
+                    rdfs:subClassOf basicemotions:IntrinsicEnjoymentAction ;
+                    exuviae:bibRef "Appreciate the good feelings around an experience completely, especially by dwelling on them." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Schadenfreude
+basicemotions:Schadenfreude rdf:type owl:Class ;
+                            rdfs:subClassOf basicemotions:Enjoyment ,
+                                            [ rdf:type owl:Restriction ;
+                                              owl:onProperty basicemotions:hasAntidote ;
+                                              owl:someValuesFrom basicemotions:SchadenfreudeAntidote
+                                            ] ,
+                                            [ rdf:type owl:Restriction ;
+                                              owl:onProperty basicemotions:moreIntenseThan ;
+                                              owl:someValuesFrom basicemotions:Amusement
+                                            ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#SchadenfreudeAntidote
+basicemotions:SchadenfreudeAntidote rdf:type owl:Class ;
+                                    rdfs:subClassOf basicemotions:EmotionAntidote ;
+                                    exuviae:bibRef "Perceiving the destructive aspect of it and trying to generate benevolence toward the person." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Scream
+basicemotions:Scream rdf:type owl:Class ;
+                     rdfs:subClassOf basicemotions:IntrinsicAngerAction ,
+                                     basicemotions:IntrinsicFearAction ;
+                     exuviae:bibRef "Lose control of one's speech; speak loudly and possibly at a higher pitch." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#SeekComfort
+basicemotions:SeekComfort rdf:type owl:Class ;
+                          rdfs:subClassOf basicemotions:IntrinsicSadnessAction ;
+                          exuviae:bibRef "Seek help or support from others." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#SeekMore
+basicemotions:SeekMore rdf:type owl:Class ;
+                       rdfs:subClassOf basicemotions:IntrinsicEnjoymentAction ;
+                       exuviae:bibRef "Attempt to increase the enjoyable feelings." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#SelectiveFilterPeriod
+basicemotions:SelectiveFilterPeriod rdf:type owl:Class ;
+                                    exuviae:bibRef """The Selective Filtering Period is initiated with the onset of actions and signals — perception is narrowed and distorted, filtering and interpreting information relevant to and consistent with the prevailing emotion. For example, when fear is aroused, there is a heightened sensitivity to real and imagined threats.
+
+Source: atlasofemotions.org/#triggers/""" .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#SensoryPleasure
+basicemotions:SensoryPleasure rdf:type owl:Class ;
+                              rdfs:subClassOf basicemotions:Enjoyment ,
+                                              [ rdf:type owl:Restriction ;
+                                                owl:onProperty basicemotions:hasImpediment ;
+                                                owl:someValuesFrom basicemotions:SensoryPleasureImpediment
+                                              ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#SensoryPleasureImpediment
+basicemotions:SensoryPleasureImpediment rdf:type owl:Class ;
+                                        rdfs:subClassOf basicemotions:EmotionImpediment ;
+                                        exuviae:bibRef "Being unable to appreciate the quality of the present moment." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#SexualAversionDisorder
+basicemotions:SexualAversionDisorder rdf:type owl:Class ;
+                                     rdfs:subClassOf basicemotions:Psychopathology ,
+                                                     [ rdf:type owl:Restriction ;
+                                                       owl:onProperty basicemotions:emotionalTendencyTowards ;
+                                                       owl:someValuesFrom basicemotions:Disgust
+                                                     ] ;
+                                     exuviae:bibRef "Characterized by disgust, fear, revulsion or lack of desire in consensual relationships involving genital contact." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Signal
+basicemotions:Signal rdf:type owl:Class ;
+                     exuviae:bibRef """The signal of an emotion describes the universal ways that emotion is displayed in the face and/or voice. There can also be other vocal tone changes and body language indicators, but these are not included here because they are often culturally informed and learned as opposed to universal.
+
+
+Source: atlasofemotions.org/#triggers/""" .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Simmer-Brood
+basicemotions:Simmer-Brood rdf:type owl:Class ;
+                           rdfs:subClassOf basicemotions:IntrinsicAngerAction ;
+                           exuviae:bibRef "Express anger by sulking." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#SocialAnxietyDisorder
+basicemotions:SocialAnxietyDisorder rdf:type owl:Class ;
+                                    rdfs:subClassOf basicemotions:Psychopathology ,
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty basicemotions:emotionalTendencyTowards ;
+                                                      owl:someValuesFrom basicemotions:Fear
+                                                    ] ;
+                                    exuviae:bibRef "A persistent fear of one or more social or performance situations in which the person is exposed to unfamiliar people or to possible scrutiny by others. The individual fears that he or she will act (or show anxiety symptoms) in a way that will be embarrassing and humiliating." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Sorrow
+basicemotions:Sorrow rdf:type owl:Class ;
+                     rdfs:subClassOf basicemotions:Sadness ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty basicemotions:moreIntenseThan ;
+                                       owl:someValuesFrom basicemotions:Grief
+                                     ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Sour
+basicemotions:Sour rdf:type owl:Class ;
+                   rdfs:subClassOf basicemotions:Mood ;
+                   exuviae:bibRef """Generally repulsed.
+
+
+Source: atlasofemotions.org/#triggers/""" .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Suppress
+basicemotions:Suppress rdf:type owl:Class ;
+                       rdfs:subClassOf basicemotions:IntentionalAngerAction ;
+                       exuviae:bibRef "Try to avoid feeling or acting upon the emotion that is being experienced." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Surprise
+basicemotions:Surprise rdf:type owl:Class ;
+                       rdfs:subClassOf basicemotions:BE_Emotion .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Terror
+basicemotions:Terror rdf:type owl:Class ;
+                     rdfs:subClassOf basicemotions:Fear ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty basicemotions:moreIntenseThan ;
+                                       owl:someValuesFrom basicemotions:Horror
+                                     ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#TerrorAntidote
+basicemotions:TerrorAntidote rdf:type owl:Class ;
+                             rdfs:subClassOf basicemotions:EmotionAntidote ;
+                             exuviae:bibRef "Instilling some calmness in the mind in order to take most appropriate decision." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Trepidation
+basicemotions:Trepidation rdf:type owl:Class ;
+                          rdfs:subClassOf basicemotions:Fear ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty basicemotions:hasAntidote ;
+                                            owl:someValuesFrom basicemotions:TrepidationAntidote
+                                          ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#TrepidationAntidote
+basicemotions:TrepidationAntidote rdf:type owl:Class ;
+                                  rdfs:subClassOf basicemotions:EmotionAntidote ;
+                                  exuviae:bibRef "Trying to ponder what can be done. Calming the mind gives the best chance to find the appropriate solution to what caused the trepidation in the first place." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Trigger
+basicemotions:Trigger rdf:type owl:Class ;
+                      owl:equivalentClass [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty dul:associatedWith ;
+                                                                   owl:someValuesFrom basicemotions:Event
+                                                                 ]
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty dul:associatedWith ;
+                                                                   owl:someValuesFrom basicemotions:PerceptionDatabase
+                                                                 ]
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty dul:associatedWith ;
+                                                                   owl:someValuesFrom basicemotions:PreCondition
+                                                                 ]
+                                                               ) ;
+                                            rdf:type owl:Class
+                                          ] ;
+                      exuviae:bibRef """This describes the combination of the automatic appraisal matching to some universal/hardwired or acquired script in our database. 
+
+Source: http://atlasofemotions.org/#triggers/""" .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Undermine
+basicemotions:Undermine rdf:type owl:Class ;
+                        rdfs:subClassOf basicemotions:IntrinsicAngerAction ;
+                        exuviae:bibRef "Take action to make someone or something weaker or less effective, usually in a secret or gradual way." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#UsePhysicalForce
+basicemotions:UsePhysicalForce rdf:type owl:Class ;
+                               rdfs:subClassOf basicemotions:IntrinsicAngerAction ;
+                               exuviae:bibRef "Harm or trap someone." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Vengefulness
+basicemotions:Vengefulness rdf:type owl:Class ;
+                           rdfs:subClassOf basicemotions:Anger ,
+                                           [ rdf:type owl:Restriction ;
+                                             owl:onProperty basicemotions:hasAntidote ;
+                                             owl:someValuesFrom basicemotions:VengefulnessAntidote
+                                           ] ,
+                                           [ rdf:type owl:Restriction ;
+                                             owl:onProperty basicemotions:moreIntenseThan ;
+                                             owl:someValuesFrom basicemotions:Bitterness
+                                           ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#VengefulnessAntidote
+basicemotions:VengefulnessAntidote rdf:type owl:Class ;
+                                   rdfs:subClassOf basicemotions:EmotionAntidote ;
+                                   exuviae:bibRef "Contemplating the negative effects of taking revenge, in the short and long term; forgiveness not as condoning harmful behavior but as breaking the cycle of resentment and hatred." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Vomit
+basicemotions:Vomit rdf:type owl:Class ;
+                    rdfs:subClassOf basicemotions:IntrinsicDisgustAction ;
+                    exuviae:bibRef "Respond to feelings of disgust by throwing up." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Withdraw
+basicemotions:Withdraw rdf:type owl:Class ;
+                       rdfs:subClassOf basicemotions:IntentionalDisgustAction ,
+                                       basicemotions:IntentionalSadnessAction ,
+                                       basicemotions:IntrinsicDisgustAction ,
+                                       basicemotions:IntrinsicFearAction ;
+                       exuviae:bibRef "Physically or mentally leave the scene of the threat." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Wonder
+basicemotions:Wonder rdf:type owl:Class ;
+                     rdfs:subClassOf basicemotions:Enjoyment ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty basicemotions:hasImpediment ;
+                                       owl:someValuesFrom basicemotions:WonderImpediment
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty basicemotions:moreIntenseThan ;
+                                       owl:someValuesFrom basicemotions:Naches
+                                     ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#WonderImpediment
+basicemotions:WonderImpediment rdf:type owl:Class ;
+                               rdfs:subClassOf basicemotions:EmotionImpediment ;
+                               exuviae:bibRef "Grasping. Unease." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Worry
+basicemotions:Worry rdf:type owl:Class ;
+                    rdfs:subClassOf basicemotions:IntrinsicFearAction ;
+                    exuviae:bibRef "Anticipate the possibility of harm." .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi

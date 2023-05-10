@@ -1,0 +1,143 @@
+@prefix : <http://www.ontologydesignpatterns.org/ont/emotions/EmoCore.owl#> .
+@prefix be: <http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#> .
+@prefix emo: <http://www.ontologydesignpatterns.org/ont/emotions/EmoCore.owl#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.ontologydesignpatterns.org/ont/emotions/EmoCore.owl> .
+
+<http://www.ontologydesignpatterns.org/ont/emotions/EmoCore.owl> rdf:type owl:Ontology ;
+                                                                  rdfs:comment """EmoCore is the core module for the EmoNet ontology network.
+It includes minimum vocabulary to speak about Emotions, modeled as a semantic frame.""" ;
+                                                                  owl:versionInfo """0.2 - 03.11.2022
+
+Modified Ekman emotions according to actual version of the theory, in particular the 5 emotions from atlasofemotions.org are covered + be:Surprise, which is considered on paulekman.com.
+Still to be modeled the formlisation proposed by Eve Ekman (present on atlasofemotions.org).
+
+
+
+0.1 - 10.05.2022
+
+Introduced Ekman emotions for the first scruffy version of frame based emotion reasoner.
+Ekman emotions triggers are taken from atlasofemotions.org, the paulekman foundation site, using as variable for the SPARQL queries to build the coverage the bootstrapped lexical units presented on the website as related to some specific emotion.""" .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/EmoCore.owl#triggers
+emo:triggers rdf:type owl:ObjectProperty ;
+             rdfs:comment "Some EmotionTrigger triggers some Emotion." .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://dbpedia.org/resource/Emotion
+<http://dbpedia.org/resource/Emotion> rdf:type owl:Class ;
+                                      rdfs:subClassOf <https://w3id.org/framester/schema/ConceptualFrame> .
+
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description
+<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description> rdf:type owl:Class .
+
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation
+<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation> rdf:type owl:Class .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/EmoCore.owl#BE_Emotion
+emo:BE_Emotion rdf:type owl:Class ;
+               rdfs:subClassOf emo:Emotion .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/EmoCore.owl#Emotion
+emo:Emotion rdf:type owl:Class ;
+            rdfs:subClassOf <https://w3id.org/framester/schema/ConceptualFrame> .
+
+
+###  https://w3id.org/framester/data/framestercore/EmotionActive
+<https://w3id.org/framester/data/framestercore/EmotionActive> rdf:type owl:Class ;
+                                                              rdfs:subClassOf <https://w3id.org/framester/schema/FrameOccurrence> .
+
+
+###  https://w3id.org/framester/data/framestercore/EmotionDirected
+<https://w3id.org/framester/data/framestercore/EmotionDirected> rdf:type owl:Class ;
+                                                                rdfs:subClassOf <https://w3id.org/framester/schema/FrameOccurrence> .
+
+
+###  https://w3id.org/framester/data/framestercore/Feeling
+<https://w3id.org/framester/data/framestercore/Feeling> rdf:type owl:Class ;
+                                                        rdfs:subClassOf <https://w3id.org/framester/schema/FrameOccurrence> .
+
+
+###  https://w3id.org/framester/data/framestercore/MentalProperty
+<https://w3id.org/framester/data/framestercore/MentalProperty> rdf:type owl:Class ;
+                                                               rdfs:subClassOf <https://w3id.org/framester/schema/FrameOccurrence> .
+
+
+###  https://w3id.org/framester/schema/ConceptualFrame
+<https://w3id.org/framester/schema/ConceptualFrame> rdf:type owl:Class ;
+                                                    rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description> .
+
+
+###  https://w3id.org/framester/schema/FrameOccurrence
+<https://w3id.org/framester/schema/FrameOccurrence> rdf:type owl:Class ;
+                                                    rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation> .
+
+
+###  https://w3id.org/framester/schema/SynsetFrame
+<https://w3id.org/framester/schema/SynsetFrame> rdf:type owl:Class ;
+                                                rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description> .
+
+
+###  https://w3id.org/framester/wn/wn30/instances/synset-emotion-noun-1
+<https://w3id.org/framester/wn/wn30/instances/synset-emotion-noun-1> rdf:type owl:Class ;
+                                                                     rdfs:subClassOf <https://w3id.org/framester/schema/ConceptualFrame> ,
+                                                                                     <https://w3id.org/framester/schema/SynsetFrame> .
+
+
+###  https://w3id.org/framester/wn/wn30/instances/synset-emotional_state-noun-1
+<https://w3id.org/framester/wn/wn30/instances/synset-emotional_state-noun-1> rdf:type owl:Class ;
+                                                                             rdfs:subClassOf <https://w3id.org/framester/schema/ConceptualFrame> ,
+                                                                                             <https://w3id.org/framester/schema/SynsetFrame> .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Anger
+be:Anger rdf:type owl:NamedIndividual ,
+                  emo:BE_Emotion .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Disgust
+be:Disgust rdf:type owl:NamedIndividual ,
+                    emo:BE_Emotion .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Enjoyment
+be:Enjoyment rdf:type owl:NamedIndividual ,
+                      emo:BE_Emotion .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Fear
+be:Fear rdf:type owl:NamedIndividual ,
+                 emo:BE_Emotion .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Sadness
+be:Sadness rdf:type owl:NamedIndividual ,
+                    emo:BE_Emotion .
+
+
+###  http://www.ontologydesignpatterns.org/ont/emotions/BasicEmotions.owl#Surprise
+be:Surprise rdf:type owl:NamedIndividual ,
+                     emo:BE_Emotion .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
